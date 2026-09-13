@@ -107,7 +107,7 @@ Spine1復旧後はNeighborを再確立し、再びECMPの2経路へ復帰する�
 3. ServerとPC間でEnd-to-End通信が可能であること
 4. Spine1のLeaf向けリンク停止時にSpine1経由の経路が消失すること
 5. Spine2経由へ経路が切り替わること
-6. Spine1のLeaf向けリンク停止中もServerとPC間で疎通可能であること
+6. Spine1のLeaf向けリンク停止後、OSPF収束後もServerとPC間で疎通可能であること
 7. Spine1復旧後にOSPF Neighborが再確立すること
 8. 復旧後にECMPの2経路へ戻ること
 
