@@ -1,0 +1,34 @@
+version 12.2(37)SE1
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
+hostname Spine2
+no profinet
+ip routing
+spanning-tree mode pvst
+
+interface FastEthernet0/1
+ no switchport
+ ip address 10.0.12.2 255.255.255.252
+ ip ospf network point-to-point
+ duplex auto
+ speed auto
+
+interface FastEthernet0/2
+ no switchport
+ ip address 10.0.22.2 255.255.255.252
+ ip ospf network point-to-point
+ duplex auto
+ speed auto
+
+interface Vlan1
+ no ip address
+ shutdown
+
+router ospf 1
+ log-adjacency-changes
+ network 10.0.12.0 0.0.0.3 area 0
+ network 10.0.22.0 0.0.0.3 area 0
+
+ip classless
+end
