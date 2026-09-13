@@ -2,7 +2,7 @@
 
 ## 1. 試験概要
 
-Leaf-Spine構成において、OSPF Neighbor、ECMP、End-to-End疎通、Spine片系障害時の経路切り替え、および復旧後のECMP再形成を確認した。
+Leaf-Spine構成において、OSPF Neighbor、ECMP、End-to-End疎通、Spine1 Leaf向けリンク障害時の経路切り替え、および復旧後のECMP再形成を確認した。
 
 ## 2. 試験環境
 
@@ -24,9 +24,9 @@ Leaf-Spine構成において、OSPF Neighbor、ECMP、End-to-End疎通、Spine�
 | 2 | Leaf1 ECMP確認 | 192.168.20.0/24への2経路が登録される | OK |
 | 3 | Leaf2 ECMP確認 | 192.168.10.0/24への2経路が登録される | OK |
 | 4 | 正常時End-to-End疎通 | ServerからPCへPing成功 | OK |
-| 5 | Spine1障害時Neighbor確認 | Spine1とのNeighborが消失する | OK |
-| 6 | Spine1障害時経路確認 | Spine2経由の1経路へ切り替わる | OK |
-| 7 | Spine1障害時疎通確認 | ServerからPCへの通信が継続する | OK |
+| 5 | Spine1 Leaf向けリンク障害時Neighbor確認 | Spine1とのNeighborが消失する | OK |
+| 6 | Spine1 Leaf向けリンク障害時経路確認 | Spine2経由の1経路へ切り替わる | OK |
+| 7 | Spine1 Leaf向けリンク障害時疎通確認 | OSPF収束後もServerからPCへ疎通可能 | OK |
 | 8 | Spine1復旧確認 | Spine1とのNeighborが再確立する | OK |
 | 9 | ECMP再形成確認 | 復旧後に2経路へ戻る | OK |
 
@@ -91,7 +91,7 @@ Serverから `192.168.20.10` へのPingが成功し、Leaf1とLeaf2をまたぐE
 
 判定：**OK**
 
-## 7. Spine1障害試験
+## 7. Spine1 Leaf向けリンク障害試験
 
 Spine1のLeaf向けインターフェースを停止し、Spine1を経由できない状態を作成した。
 
@@ -119,13 +119,13 @@ O    192.168.20.0 [110/3] via 10.0.12.2, FastEthernet0/2
 
 ### 障害時End-to-End疎通
 
-Spine1停止中にServerからPCへPingを実施した。
+Spine1のLeaf向けリンク停止中にServerからPCへPingを実施した。
 
 ```text
 Packets: Sent = 4, Received = 4, Lost = 0 (0% loss)
 ```
 
-Spine1停止中もSpine2経由で通信を継続できることを確認した。
+Spine1のLeaf向けリンク停止後、OSPF収束後もSpine2経由でEnd-to-End疎通が可能であることを確認した。
 
 判定：**OK**
 
@@ -148,7 +148,7 @@ interface range FastEthernet0/1 - 2
 
 OSPFによる動的ルーティングが正常に動作し、正常時にはSpine1・Spine2を利用したECMPが成立することを確認した。
 
-また、Spine1障害時にはOSPFが残存するSpine2経由の経路へ収束し、End-to-End通信を継続できることを確認した。
+また、Spine1のLeaf向けリンク停止時にはOSPFがSpine2経由の経路へ収束し、その後もEnd-to-End疎通が可能であることを確認した。
 
 Spine1復旧後にはOSPF Neighborが再確立され、ECMPの2経路へ正常に復帰することも確認した。
 

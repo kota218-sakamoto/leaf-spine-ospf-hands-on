@@ -6,7 +6,7 @@ Cisco Packet Tracerを使用し、2台のSpineスイッチと2台のLeafスイ�
 
 Leaf-Spine間はLayer3 Point-to-Pointリンクとし、OSPF Area 0を使用して動的ルーティングを行う。
 
-Spineを2台配置することでLeaf間に複数経路を確保し、正常時はECMPによる等コストルーティングを使用する。また、Spine片系障害時にも残存経路を利用して通信を継続できる構成とする。
+Spineを2台配置することでLeaf間に複数経路を確保し、正常時はECMPによる等コストルーティングを使用する。また、Spine1のLeaf向けリンク停止時にも、残存するSpine2経由の経路を利用できる構成とする。
 
 ## 2. ネットワーク構成
 
@@ -86,7 +86,7 @@ Leaf1
   └─ Spine2 ─ Leaf2
 ```
 
-### Spine1障害時
+### Spine1 Leaf向けリンク障害時
 
 ```text
 Leaf1
@@ -94,7 +94,7 @@ Leaf1
   └─ Spine2 ─ Leaf2
 ```
 
-Spine1障害時はSpine1とのOSPF Neighborが消失し、Spine2経由の経路のみが残る設計とする。
+Spine1のLeaf向けリンク停止時はSpine1とのOSPF Neighborが消失し、Spine2経由の経路のみが残る設計とする。
 
 Spine1復旧後はNeighborを再確立し、再びECMPの2経路へ復帰する。
 
@@ -105,17 +105,17 @@ Spine1復旧後はNeighborを再確立し、再びECMPの2経路へ復帰する�
 1. 正常時にOSPF NeighborがFULL状態であること
 2. 正常時にLeaf間でECMPが成立していること
 3. ServerとPC間でEnd-to-End通信が可能であること
-4. Spine1停止時にSpine1経由の経路が消失すること
+4. Spine1のLeaf向けリンク停止時にSpine1経由の経路が消失すること
 5. Spine2経由へ経路が切り替わること
-6. Spine1停止中もServerとPC間の通信が継続すること
+6. Spine1のLeaf向けリンク停止中もServerとPC間で疎通可能であること
 7. Spine1復旧後にOSPF Neighborが再確立すること
 8. 復旧後にECMPの2経路へ戻ること
 
 ## 8. 設計上のポイント
 
-- Leaf-Spine間をL3接続とし、STPに依存しない構成とした
+- Leaf-Spine間はL3 Routed Portで接続し、ファブリックの冗長化にSTPを使用しない構成とした
 - OSPFによって経路情報を動的に交換する
 - Point-to-Point Network Typeを使用してDR/BDR選出を不要とした
 - 2台のSpineを利用してLeaf間経路を冗長化した
 - ECMPにより正常時は複数経路を利用可能とした
-- Spine片系障害時にも残存経路で通信を継続できることを検証した
+- Spine1のLeaf向けリンク停止時にも残存経路で疎通可能であることを検証した
