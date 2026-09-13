@@ -65,6 +65,8 @@ Spineを2台配置することでLeaf間に複数経路を確保し、正常時�
 - Leaf-Spine間：Point-to-Point
 - Leaf1 LAN：192.168.10.0/24をOSPFで広告
 - Leaf2 LAN：192.168.20.0/24をOSPFで広告
+- Leaf1 Vlan10：Passive Interface
+- Leaf2 Vlan20：Passive Interface
 
 Leaf-Spine間は1対1のLayer3接続であるため、OSPF Network TypeをPoint-to-Pointとする。
 

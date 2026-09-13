@@ -35,6 +35,7 @@ interface Vlan20
 
 router ospf 1
  log-adjacency-changes
+ passive-interface Vlan20
  network 10.0.21.0 0.0.0.3 area 0
  network 10.0.22.0 0.0.0.3 area 0
  network 192.168.20.0 0.0.0.255 area 0

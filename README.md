@@ -42,6 +42,7 @@ Leaf-Spine間をLayer3 Point-to-Pointリンクとして構成し、OSPF Area 0�
 - Layer3 Routed Port
 - OSPF Area 0
 - OSPF Point-to-Point Network Type
+- Passive InterfaceによるOSPF Hello送信抑止
 - OSPF Neighbor確立
 - ECMPによる複数経路
 - VLAN10 / VLAN20

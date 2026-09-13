@@ -68,6 +68,7 @@
 | Network | 10.0.11.0/30 |
 | Network | 10.0.12.0/30 |
 | Network | 192.168.10.0/24 |
+| Passive Interface | Vlan10 |
 
 ## 5. Leaf2
 
@@ -89,6 +90,7 @@
 | Network | 10.0.21.0/30 |
 | Network | 10.0.22.0/30 |
 | Network | 192.168.20.0/24 |
+| Passive Interface | Vlan20 |
 
 ## 6. エンド端末
 
