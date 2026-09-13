@@ -4,7 +4,7 @@ Cisco Packet Tracerを使用して、2台のSpineスイッチと2台のLeafス�
 
 Leaf-Spine間をLayer3 Point-to-Pointリンクとして構成し、OSPF Area 0による動的ルーティングを実装しています。
 
-また、Spine1・Spine2を利用したECMP（Equal-Cost Multi-Path）を確認し、Spine1のLeaf向けリンク停止時にSpine2経由へ経路が切り替わり、障害収束後もEnd-to-End疎通が可能であることを検証しました。
+また、Spine1・Spine2を利用したECMP（Equal-Cost Multi-Path）を確認し、Spine1のLeaf向けリンク停止時にSpine2経由へ経路が切り替わり、OSPF収束後もEnd-to-End疎通が可能であることを検証しました。
 
 ## ネットワーク構成
 
@@ -48,9 +48,9 @@ Leaf-Spine間をLayer3 Point-to-Pointリンクとして構成し、OSPF Area 0�
 - VLAN10 / VLAN20
 - SVIによるデフォルトゲートウェイ
 - End-to-End疎通確認
-- Spine1 Leaf向けリンク障害試験
+- Spine1のLeaf向けリンク停止試験
 - OSPF経路切り替え確認
-- 障害収束後のEnd-to-End疎通確認
+- OSPF収束後のEnd-to-End疎通確認
 - 復旧後のECMP再形成確認
 
 ## OSPF / ECMP確認
@@ -76,7 +76,7 @@ O 192.168.20.0 [110/3] via 10.0.12.2, FastEthernet0/2
 
 この状態でもServerからPCへのPingが成功し、Spine1のLeaf向けリンク停止後、OSPF収束後もEnd-to-End疎通が可能であることを確認しました。
 
-Spine1復旧後はOSPF Neighborが再確立され、再び2つの等コスト経路に戻ることも確認しました。
+Spine1のLeaf向けリンク復旧後はOSPF Neighborが再確立され、再び2つの等コスト経路に戻ることも確認しました。
 
 ## 詳細資料
 
@@ -121,11 +121,11 @@ Spine1復旧後はOSPF Neighborが再確立され、再び2つの等コスト経
 
 ![End-to-End Ping](evidence/03-end-to-end-ping.png)
 
-### Spine1 Leaf向けリンク障害時の経路切り替え
+### Spine1のLeaf向けリンク停止時の経路切り替え
 
 ![Spine1 Failure](evidence/04-spine1-failure-route.png)
 
-### 障害収束後の疎通確認
+### OSPF収束後の疎通確認
 
 ![Ping After Failure](evidence/05-ping-after-spine1-failure.png)
 

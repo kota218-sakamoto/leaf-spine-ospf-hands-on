@@ -86,7 +86,7 @@ Leaf1
   └─ Spine2 ─ Leaf2
 ```
 
-### Spine1 Leaf向けリンク障害時
+### Spine1のLeaf向けリンク停止時
 
 ```text
 Leaf1
@@ -96,7 +96,7 @@ Leaf1
 
 Spine1のLeaf向けリンク停止時はSpine1とのOSPF Neighborが消失し、Spine2経由の経路のみが残る設計とする。
 
-Spine1復旧後はNeighborを再確立し、再びECMPの2経路へ復帰する。
+Spine1のLeaf向けリンク復旧後はNeighborを再確立し、再びECMPの2経路へ復帰する。
 
 ## 7. 障害試験方針
 
@@ -108,7 +108,7 @@ Spine1復旧後はNeighborを再確立し、再びECMPの2経路へ復帰する�
 4. Spine1のLeaf向けリンク停止時にSpine1経由の経路が消失すること
 5. Spine2経由へ経路が切り替わること
 6. Spine1のLeaf向けリンク停止後、OSPF収束後もServerとPC間で疎通可能であること
-7. Spine1復旧後にOSPF Neighborが再確立すること
+7. Spine1のLeaf向けリンク復旧後にOSPF Neighborが再確立すること
 8. 復旧後にECMPの2経路へ戻ること
 
 ## 8. 設計上のポイント

@@ -2,7 +2,7 @@
 
 ## 1. 試験概要
 
-Leaf-Spine構成において、OSPF Neighbor、ECMP、End-to-End疎通、Spine1 Leaf向けリンク障害時の経路切り替え、および復旧後のECMP再形成を確認した。
+Leaf-Spine構成において、OSPF Neighbor、ECMP、End-to-End疎通、Spine1のLeaf向けリンク停止時の経路切り替え、および復旧後のECMP再形成を確認した。
 
 ## 2. 試験環境
 
@@ -24,10 +24,10 @@ Leaf-Spine構成において、OSPF Neighbor、ECMP、End-to-End疎通、Spine1 
 | 2 | Leaf1 ECMP確認 | 192.168.20.0/24への2経路が登録される | OK |
 | 3 | Leaf2 ECMP確認 | 192.168.10.0/24への2経路が登録される | OK |
 | 4 | 正常時End-to-End疎通 | ServerからPCへPing成功 | OK |
-| 5 | Spine1 Leaf向けリンク障害時Neighbor確認 | Spine1とのNeighborが消失する | OK |
-| 6 | Spine1 Leaf向けリンク障害時経路確認 | Spine2経由の1経路へ切り替わる | OK |
-| 7 | Spine1 Leaf向けリンク障害時疎通確認 | OSPF収束後もServerからPCへ疎通可能 | OK |
-| 8 | Spine1復旧確認 | Spine1とのNeighborが再確立する | OK |
+| 5 | Spine1のLeaf向けリンク停止時Neighbor確認 | Spine1とのNeighborが消失する | OK |
+| 6 | Spine1のLeaf向けリンク停止時経路確認 | Spine2経由の1経路へ切り替わる | OK |
+| 7 | Spine1のLeaf向けリンク停止時疎通確認 | OSPF収束後もServerからPCへ疎通可能 | OK |
+| 8 | Spine1のLeaf向けリンク復旧確認 | Spine1とのNeighborが再確立する | OK |
 | 9 | ECMP再形成確認 | 復旧後に2経路へ戻る | OK |
 
 ## 4. OSPF Neighbor確認
@@ -91,7 +91,7 @@ Serverから `192.168.20.10` へのPingが成功し、Leaf1とLeaf2をまたぐE
 
 判定：**OK**
 
-## 7. Spine1 Leaf向けリンク障害試験
+## 7. Spine1のLeaf向けリンク停止試験
 
 Spine1のLeaf向けインターフェースを停止し、Spine1を経由できない状態を作成した。
 
@@ -129,7 +129,7 @@ Spine1のLeaf向けリンク停止後、OSPF収束後もSpine2経由でEnd-to-En
 
 判定：**OK**
 
-## 8. Spine1復旧試験
+## 8. Spine1のLeaf向けリンク復旧試験
 
 Spine1のLeaf向けインターフェースを復旧した。
 
@@ -150,6 +150,6 @@ OSPFによる動的ルーティングが正常に動作し、正常時にはSpin
 
 また、Spine1のLeaf向けリンク停止時にはOSPFがSpine2経由の経路へ収束し、その後もEnd-to-End疎通が可能であることを確認した。
 
-Spine1復旧後にはOSPF Neighborが再確立され、ECMPの2経路へ正常に復帰することも確認した。
+Spine1のLeaf向けリンク復旧後にはOSPF Neighborが再確立され、ECMPの2経路へ正常に復帰することも確認した。
 
 総合判定：**OK**
