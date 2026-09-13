@@ -104,3 +104,29 @@ Spine1復旧後はOSPF Neighborが再確立され、再び2つの等コスト経
 本ハンズオンでは、OSPFの設定だけでなく、ルーティングテーブルやNeighbor状態を確認しながら、冗長経路がどのように形成されるかを検証しました。
 
 また、Spine障害を発生させ、OSPFによる経路切り替えと通信継続、復旧後のECMP再形成まで確認することで、冗長ネットワークにおける障害時の動作について理解を深めました。
+
+## 検証Evidence
+
+### OSPF Neighbor
+
+![OSPF Neighbor](evidence/01-ospf-neighbor.png)
+
+### ECMP
+
+![ECMP](evidence/02-ecmp-leaf1.png)
+
+### End-to-End疎通
+
+![End-to-End Ping](evidence/03-end-to-end-ping.png)
+
+### Spine1障害時の経路切り替え
+
+![Spine1 Failure](evidence/04-spine1-failure-route.png)
+
+### 障害時の通信継続
+
+![Ping After Failure](evidence/05-ping-after-spine1-failure.png)
+
+### 復旧後のECMP再形成
+
+![OSPF Failback](evidence/06-ospf-failback.png)
